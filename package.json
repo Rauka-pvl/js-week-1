@@ -1,0 +1,19 @@
+{
+  "name": "datashare-week1",
+  "version": "1.0.0",
+  "description": "DataShare CLI — консольное приложение на современном JavaScript (Практическая работа, неделя 1)",
+  "type": "module",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js"
+  },
+  "keywords": [
+    "javascript",
+    "node",
+    "es6",
+    "cli",
+    "datashare"
+  ],
+  "author": "Аделканов Рауат, CS-302(с)",
+  "license": "ISC"
+}
