@@ -20,7 +20,6 @@ JavaScript → Node.js → REST → MongoDB → Mongoose → авторизац�
 
 ## Требования
 
-- Node.js **v18+** (разработано и проверено на **v24.6.0**)
 - Внешних зависимостей нет — `npm install` не требуется
 
 ## Установка
@@ -56,52 +55,52 @@ datashare-week1/
 
 ### `src/services/itemService.js`
 
-| Функция | Что делает |
-|---|---|
-| `getAllItems(items)` | Возвращает копию массива всех записей |
-| `getItemById(items, id)` | Возвращает одну запись по id или `null` |
-| `createItem(items, data)` | Создаёт новую запись (id генерируется, `createdAt` проставляется автоматически) |
-| `deleteItem(items, id)` | Возвращает новый массив без записи с указанным id |
-| `findByCategory(items, category)` | Фильтрует записи по категории без учёта регистра |
-| `calculateTotalPrice(items)` | Считает общую стоимость через `reduce` |
-| `calculateAveragePrice(items)` | Считает среднюю цену записи |
-| `searchItems(items, query)` | Ищет по `title` и `description` без учёта регистра |
-| `getItemTitles(items)` | Возвращает список названий через `map` |
-| `getCategoryStats(items)` | Группирует записи по категориям и считает суммы через `reduce` |
-| `loadItems(items, delayMs)` | Асинхронно «загружает» данные (имитация сервера через `setTimeout`) |
+| Функция                           | Что делает                                                                      |
+| --------------------------------- | ------------------------------------------------------------------------------- |
+| `getAllItems(items)`              | Возвращает копию массива всех записей                                           |
+| `getItemById(items, id)`          | Возвращает одну запись по id или `null`                                         |
+| `createItem(items, data)`         | Создаёт новую запись (id генерируется, `createdAt` проставляется автоматически) |
+| `deleteItem(items, id)`           | Возвращает новый массив без записи с указанным id                               |
+| `findByCategory(items, category)` | Фильтрует записи по категории без учёта регистра                                |
+| `calculateTotalPrice(items)`      | Считает общую стоимость через `reduce`                                          |
+| `calculateAveragePrice(items)`    | Считает среднюю цену записи                                                     |
+| `searchItems(items, query)`       | Ищет по `title` и `description` без учёта регистра                              |
+| `getItemTitles(items)`            | Возвращает список названий через `map`                                          |
+| `getCategoryStats(items)`         | Группирует записи по категориям и считает суммы через `reduce`                  |
+| `loadItems(items, delayMs)`       | Асинхронно «загружает» данные (имитация сервера через `setTimeout`)             |
 
 ### `src/utils/helpers.js`
 
-| Функция | Что делает |
-|---|---|
-| `formatPrice(price)` | Форматирует число как цену: `2 450 000 ₸` |
-| `formatItem(item, index)` | Формирует строку записи для вывода |
-| `getSeriesName(item)` | Безопасно возвращает название серии книги |
-| `printSection(title)` | Печатает заголовок секции |
-| `printLines(...lines)` | Печатает произвольное число строк |
-| `delay(ms)` | Promise-обёртка над `setTimeout` |
-| `generateId(items)` | Возвращает `max(id) + 1` — без дубликатов даже после удаления |
+| Функция                   | Что делает                                                    |
+| ------------------------- | ------------------------------------------------------------- |
+| `formatPrice(price)`      | Форматирует число как цену: `2 450 000 ₸`                     |
+| `formatItem(item, index)` | Формирует строку записи для вывода                            |
+| `getSeriesName(item)`     | Безопасно возвращает название серии книги                     |
+| `printSection(title)`     | Печатает заголовок секции                                     |
+| `printLines(...lines)`    | Печатает произвольное число строк                             |
+| `delay(ms)`               | Promise-обёртка над `setTimeout`                              |
+| `generateId(items)`       | Возвращает `max(id) + 1` — без дубликатов даже после удаления |
 
 ## Использованные возможности ES6+
 
-| Конструкция | Где используется |
-|---|---|
-| `const` / `let` | Весь проект; `var` не используется |
-| Arrow functions | Все функции в `itemService.js` и `helpers.js` |
-| Template literals | Все сообщения программы: `` `${title} — ${author}` `` |
-| Destructuring | `formatItem` (объект), `generateId` и `map(({ id }) => ...)` (параметры), `for (const [category, { count, totalPrice }] of ...)` в `index.js` |
-| Spread | `[...items]`, `{ ...data }` в `createItem`, `Math.max(...ids)` |
-| Rest | `printLines(...lines)` в `helpers.js` |
-| Default parameters | `formatItem(item, index = null)`, `searchItems(items, query = "")`, `loadItems(items, delayMs = 1500)` |
-| Optional chaining `?.` | `item?.series?.name` в `getSeriesName`, `item.series?.name` в `formatItem` |
-| Nullish coalescing `??` | `index ?? id`, `items.find(...) ?? null`, `stats[category] ?? {...}` |
-| `map` | Список названий, форматирование записей |
-| `filter` | `findByCategory`, `searchItems`, `deleteItem` |
-| `find` | `getItemById` |
-| `reduce` | `calculateTotalPrice`, `getCategoryStats` |
-| `Promise` + `async/await` | `delay`, `loadItems`, функция `main` в `index.js` |
-| `try/catch` | Обработка ошибок асинхронной загрузки в `index.js` |
-| ES Modules | `import` / `export` во всех файлах, `"type": "module"` в `package.json` |
+| Конструкция               | Где используется                                                                                                                              |
+| ------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------- |
+| `const` / `let`           | Весь проект; `var` не используется                                                                                                            |
+| Arrow functions           | Все функции в `itemService.js` и `helpers.js`                                                                                                 |
+| Template literals         | Все сообщения программы: `` `${title} — ${author}` ``                                                                                         |
+| Destructuring             | `formatItem` (объект), `generateId` и `map(({ id }) => ...)` (параметры), `for (const [category, { count, totalPrice }] of ...)` в `index.js` |
+| Spread                    | `[...items]`, `{ ...data }` в `createItem`, `Math.max(...ids)`                                                                                |
+| Rest                      | `printLines(...lines)` в `helpers.js`                                                                                                         |
+| Default parameters        | `formatItem(item, index = null)`, `searchItems(items, query = "")`, `loadItems(items, delayMs = 1500)`                                        |
+| Optional chaining `?.`    | `item?.series?.name` в `getSeriesName`, `item.series?.name` в `formatItem`                                                                    |
+| Nullish coalescing `??`   | `index ?? id`, `items.find(...) ?? null`, `stats[category] ?? {...}`                                                                          |
+| `map`                     | Список названий, форматирование записей                                                                                                       |
+| `filter`                  | `findByCategory`, `searchItems`, `deleteItem`                                                                                                 |
+| `find`                    | `getItemById`                                                                                                                                 |
+| `reduce`                  | `calculateTotalPrice`, `getCategoryStats`                                                                                                     |
+| `Promise` + `async/await` | `delay`, `loadItems`, функция `main` в `index.js`                                                                                             |
+| `try/catch`               | Обработка ошибок асинхронной загрузки в `index.js`                                                                                            |
+| ES Modules                | `import` / `export` во всех файлах, `"type": "module"` в `package.json`                                                                       |
 
 ## Пример вывода
 
